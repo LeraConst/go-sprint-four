@@ -23,7 +23,7 @@ func distance(action int) float64 {
 	return float64(action) * lenStep / mInKm
 }
 
-// meanSpeed возвращает значение средней скорости движения во время тренировки.
+// meanSpeed возвращает значение средней скорости движения во время тренировки (в км в час).
 //
 // Параметры:
 //
@@ -101,8 +101,8 @@ const (
 // weight float64 — вес пользователя.
 // height float64 — рост пользователя.
 func WalkingSpentCalories(action int, duration, weight, height float64) float64 {
-	speedInMsec := meanSpeed(action, duration) * kmhInMsec
-	ccal := ((walkingCaloriesWeightMultiplier*weight + (math.Pow(speedInMsec, 2)/height)*walkingSpeedHeightMultiplier*weight) * duration * minInH)
+	walkSpeedInMsec := meanSpeed(action, duration) * kmhInMsec
+	ccal := (walkingCaloriesWeightMultiplier*weight + (math.Pow(walkSpeedInMsec, 2)/(height/cmInM))*walkingSpeedHeightMultiplier*weight) * duration * minInH
 	return ccal
 }
 
